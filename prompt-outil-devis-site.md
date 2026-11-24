@@ -41,6 +41,7 @@ Une liste de contenus, chacun avec un compteur − / +, de 0 à 20. Plusieurs co
 | Interview ou témoignage (jusqu'à 1'30) | Tournage de l'interview et montage |
 | Vidéo récap d'événement (1'30 à 2 min) | Couverture de l'événement et montage d'un récap |
 | Vidéo de présentation (2 à 3 min, avec motion design) | Préparation, tournage à 2 personnes et montage avec motion design |
+| Reportage / mini-documentaire (3 à 5 min) | Préparation (écriture, repérage, questions), tournage et montage complet : dérushage, étalonnage, mixage, sous-titres |
 | Pack photo (30 à 50 photos retouchées) | 30 à 50 photos retouchées en haute définition |
 | Photos d'événement (30 photos) | 30 photos retouchées prises pendant l'événement |
 | Capsule tirée d'une vidéo existante | Montage d'une capsule à partir d'une vidéo que vous avez déjà |
@@ -51,6 +52,10 @@ Sous la liste, affiche une fois : « Toujours inclus : sous-titres, formats vert
 **Une question en plus seulement si besoin :** si le visiteur choisit « Vidéo récap d'événement », « Photos d'événement » ou « Captation seule », demande « Combien de temps durera l'événement ? ».
 - Les choix sont 1 h, 2 h, 3 h, 4 h, 5 h, 6 h, 8 h.
 - La valeur par défaut est 3 h.
+
+**Le reportage a sa propre question :** s'il choisit « Reportage / mini-documentaire », demande « Combien de temps de tournage ? » (et non la durée de l'événement).
+- Les choix sont 4 h, 8 h, 2 jours (= 16 h).
+- La valeur par défaut est 8 h.
 
 ### 2. « Votre secteur »
 
@@ -109,6 +114,7 @@ Pour chaque contenu, trois données :
 | `interview` | Interview ou témoignage | par unité, × coefficient | 1,5 | 3 | 0 |
 | `recap_evenement` | Vidéo récap d'événement | durée de l'événement (étape 1), sans coefficient | durée saisie | 6 | 0 |
 | `video_presentation` | Vidéo de présentation | une journée à part : 8 h à 2 personnes, par vidéo | 8 (× 2 personnes) | 16 | 4 |
+| `reportage` | Reportage / mini-documentaire | durée de tournage saisie (4 h, 8 h, 16 h), sans coefficient | durée saisie | 16 | 4 |
 | `pack_photo` | Pack photo | **seul** : 3 h × coefficient ; **avec un autre tournage** : +1 h fixe | 3 ou +1 | 5 | 0 |
 | `photos_evenement` | Photos d'événement | aucun tournage en plus ; il faut une durée de présence | 0 | 1,5 | 0 |
 | `capsule` | Capsule d'une vidéo existante | aucun tournage | 0 | 1,5 | 0 |
@@ -133,6 +139,7 @@ Pour chaque contenu, trois données :
    - les durées d'événement :
      - **une seule fois** pour l'ensemble de l'événement, même si récap, captation et photos d'événement sont choisis ensemble ;
      - deux événements distincts ne se prévoient pas dans ce simulateur, ce cas passe par le devis ;
+   - la durée de tournage du reportage (4 h, 8 h ou 16 h), **ajoutée telle quelle** à ce total, sans coefficient et sans se confondre avec la durée d'un événement ;
    - si **aucun autre tournage** n'existe : pack photo, quantité × 3 h × coefficient ;
    - les heures de tournage des options cochées (voir plus bas).
 
@@ -218,6 +225,11 @@ Voici ce que chaque option ajoute. « par vidéo » ou « par pack » veut dire 
 | Vidéo de présentation | Prises de vues par drone | +180 € |
 | Vidéo de présentation | Maquillage ou figurant | +150 € |
 | Vidéo de présentation | Version longue (5 min) | le montage passe de 16 h à 22 h par vidéo |
+| Reportage | Version longue (8 à 10 min) | le montage passe de 16 h à 24 h par reportage |
+| Reportage | Version courte de 60 s pour les réseaux | +2 h de montage par reportage |
+| Reportage | Prises de vues par drone | +150 € |
+| Reportage | Voix off | +1 h de montage par reportage |
+| Reportage | Musique sous licence premium | +40 € |
 | Pack photo | 10 photos en plus | +1 h de montage par pack |
 | Pack photo | Retouches avancées | +2 h de montage par pack |
 | Pack photo | Éclairage studio | +1 h de tournage (une fois) |
@@ -256,6 +268,7 @@ Ces chiffres sortent du vrai moteur de Pilotage. Écris des tests automatiques q
 | Récap d'événement, 4 h | 780 € | 700 € – 900 € |
 | Récap d'événement, 4 h, soir ou week-end | 858 € | 770 € – 990 € |
 | 1 Vidéo de présentation, commerce | 2 808 € | 2 530 € – 3 230 € |
+| 1 Reportage, 8 h de tournage, semaine, Lyon | 2 184 € | 1 970 € – 2 510 € |
 | Pack photo seul, restauration | 624 € | 560 € – 720 € |
 | 2 Reels + pack photo, restauration | 858 € | 770 € – 990 € |
 | Récap d'événement 3 h + photos d'événement | 819 € | 740 € – 940 € |
