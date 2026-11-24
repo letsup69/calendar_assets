@@ -61,14 +61,11 @@ Sous la liste, affiche une fois : « Toujours inclus : sous-titres, formats vert
 
 Choix unique : Restauration, Commerce, Immobilier, Industrie et BTP, Tertiaire et bureaux, Autre. « Autre » vaut comme Commerce.
 
-### 3. « Quand et où ? »
+### 3. « Quand ? »
 
-- **Quand :** « En semaine, en journée » ou « Le soir ou le week-end ».
-- **Où :**
-  - Lyon et l'Ouest lyonnais (moins de 30 min de Chaponost) ;
-  - À moins d'une heure de Lyon ;
-  - Entre 1 h et 2 h de Lyon ;
-  - Plus loin.
+Choix unique : « En semaine, en journée » ou « Le soir ou le week-end ».
+
+On ne demande **pas** le lieu : le simulateur ne parle jamais de déplacement (voir « À ne pas faire »).
 
 ### 4. (Facultatif) « Des options ? »
 
@@ -79,7 +76,6 @@ Un volet replié « Ajouter des options ». Il ne montre que les options des con
 - En gros : **« Entre 560 € et 720 € HT »**.
 - En dessous, en petit : « soit entre 672 € et 864 € TTC », avec la TVA à 20 %.
 - Une ligne de résumé : « Tournage : 1 journée à 1 personne (3 h). »
-- **Si la zone est « Plus loin »**, ajoute : « + déplacement, chiffré dans le devis ».
 - La mention : « Estimation indicative, non contractuelle. Votre devis précis vous est envoyé après un court échange. »
 - Un bouton **« Recevoir mon devis précis »**. Il ouvre le formulaire de contact du site et pré-remplit le message avec le récapitulatif des choix et la fourchette.
 
@@ -156,43 +152,19 @@ Pour chaque contenu, trois données :
 
 7. **Les options à prix fixe :** elles s'ajoutent telles quelles.
 
-8. **Le déplacement** (règle plus bas).
+8. **Le total :** prix HT = tournage + montage + préparation + options à prix fixe.
 
-9. **Le total :** prix HT = tournage + montage + préparation + options à prix fixe + déplacement.
-
-10. **La fourchette :**
+9. **La fourchette :**
     - bas = arrondi(HT × 0,90, à 10 € près) ;
     - haut = arrondi(HT × 1,15, à 10 € près).
 
     Arrondi au plus proche : 563 € donne 560 €, 565 € donne 570 €. Pour le TTC, applique la même chose sur HT × 1,2.
 
-11. **Le résumé :**
+10. **Le résumé :**
     - nombre de journées = arrondi supérieur(tournage commun ÷ 8, ajout photo compris) + nombre de vidéos de présentation ;
     - durée affichée = tournage commun + ajouts photo + 8 h par vidéo de présentation.
 
     Exemple : « Tournage : 1 journée à 1 personne (3 h). » N'affiche pas cette ligne s'il n'y a aucun tournage (capsule seule).
-
-### Le déplacement (simplifié pour le site)
-
-Le départ est Chaponost (69630). Dans l'outil interne, la règle est la suivante :
-- rien n'est facturé sous 30 min de trajet aller ;
-- sinon, on compte 0,60 € par km aller-retour ;
-- plus 39 € de l'heure de trajet aller-retour, par personne et par jour.
-
-Le site ne connaît pas l'adresse exacte, donc il utilise des zones forfaitaires :
-
-| Zone choisie | Calcul par jour de tournage |
-|---|---|
-| Lyon et l'Ouest lyonnais | 0 € |
-| À moins d'une heure de Lyon | 72 € + 78 € × personnes (hypothèse : 120 km et 2 h aller-retour) |
-| Entre 1 h et 2 h de Lyon | 150 € + 117 € × personnes (hypothèse : 250 km et 3 h aller-retour) |
-| Plus loin | non calculé : mention « + déplacement, chiffré dans le devis » |
-
-Le nombre de jours, c'est le nombre de journées calculé plus haut.
-- **Zone « moins d'une heure » :** un aller-retour par jour.
-- **Zone « 1 h à 2 h » sur plusieurs jours :** un seul aller-retour, plus 150 € d'hôtel par personne et par nuit (journées − 1 nuits).
-
-Le déplacement ne subit **ni** la majoration du soir **ni** le coefficient du secteur.
 
 ### Les options (étape 4)
 
@@ -257,7 +229,7 @@ Ces chiffres sortent du vrai moteur de Pilotage. Écris des tests automatiques q
 
 | Choix | Prix HT | Fourchette HT |
 |---|---|---|
-| 1 Reel, restauration, semaine, Lyon | 273 € | 250 € – 310 € |
+| 1 Reel, restauration, semaine | 273 € | 250 € – 310 € |
 | 4 Reels, restauration | 624 € | 560 € – 720 € |
 | 10 Reels, restauration | 1 560 € | 1 400 € – 1 790 € |
 | 1 Vidéo réseaux, commerce | 390 € | 350 € – 450 € |
@@ -268,14 +240,13 @@ Ces chiffres sortent du vrai moteur de Pilotage. Écris des tests automatiques q
 | Récap d'événement, 4 h | 780 € | 700 € – 900 € |
 | Récap d'événement, 4 h, soir ou week-end | 858 € | 770 € – 990 € |
 | 1 Vidéo de présentation, commerce | 2 808 € | 2 530 € – 3 230 € |
-| 1 Reportage, 8 h de tournage, semaine, Lyon | 2 184 € | 1 970 € – 2 510 € |
+| 1 Reportage, 8 h de tournage, semaine | 2 184 € | 1 970 € – 2 510 € |
 | Pack photo seul, restauration | 624 € | 560 € – 720 € |
 | 2 Reels + pack photo, restauration | 858 € | 770 € – 990 € |
 | Récap d'événement 3 h + photos d'événement | 819 € | 740 € – 940 € |
 | Captation 5 h + photos d'événement, week-end | 604,50 € | 540 € – 700 € |
 | 1 Capsule | 117 € | 110 € – 130 € |
 | Captation seule, 3 h | 234 € | 210 € – 270 € |
-| 1 Reel, restauration, zone « à moins d'une heure » | 423 € | 380 € – 490 € |
 
 Exemple déroulé, « 2 Reels + pack photo, restauration » :
 1. Tournage commun : 2 × 0,5 h × 1 = 1 h, porté au minimum de 2 h.
@@ -293,9 +264,10 @@ Exemple déroulé, « 2 Reels + pack photo, restauration » :
 - N'ajoute aucune remise, aucun code promo, aucune « offre ».
 - N'invente pas de contenus ni d'options hors de cette liste.
 - Ne demande ni e-mail ni téléphone pour voir le prix.
+- Ne parle jamais de déplacement : pas de question sur le lieu, pas de ligne « déplacement », pas de supplément. Let's Up le chiffre dans le devis précis quand le tournage est à plus d'une heure de Lyon.
 - N'enregistre rien côté navigateur (pas de cookie, pas de stockage local), sauf le récapitulatif passé au formulaire de contact quand le visiteur clique.
 
 ## Bonus (si simple à faire)
 
 - Un lien de partage qui recharge les mêmes choix (paramètres dans l'adresse).
-- Toutes les règles regroupées dans un seul objet de configuration (contenus, options, secteurs, constantes, zones), pour que Let's Up puisse changer un prix sans toucher au code.
+- Toutes les règles regroupées dans un seul objet de configuration (contenus, options, secteurs, constantes), pour que Let's Up puisse changer un prix sans toucher au code.
